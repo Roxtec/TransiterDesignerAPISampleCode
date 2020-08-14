@@ -1,2 +1,7 @@
 swagger.json
 Full
+Full.cs
+bin/
+obj/
+.idea/
+.vs/
