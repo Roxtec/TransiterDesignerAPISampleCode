@@ -60,7 +60,7 @@ package called `nswag`. Note that this requires Node.js and the `npx` to be inst
 
 2. Install npx
 
-        npm install npx
+        npm install -g npx
 
 2. Run the following command from a PowerShell or command prompt:
 
