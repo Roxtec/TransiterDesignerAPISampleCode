@@ -46,11 +46,27 @@ Here we use [NSwag](https://github.com/RicoSuter/NSwag) to generate the client.
 It can be done in many different ways (see the NSwag link). Here we do it with an npm
 package called `nswag`. Note that this requires Node.js and the `npx` to be installed.
 
-1. Run the following command from a PowerShell or command prompt:
+1. Check if you have node installed:
+
+        node -v
+
+    It should return something like:
+    ```
+     >node -v
+     v12.18.3
+    ```
+    if it cant be found head over to: https://nodejs.org/en/download/
+    and download an installation.
+
+2. Install npx
+
+        npm install npx
+
+2. Run the following command from a PowerShell or command prompt:
 
         npx nswag swagger2csclient --core 3.1
 
-2. The program first asks about namespace of the generated classes. You can choose whatever
+3. The program first asks about namespace of the generated classes. You can choose whatever
 you like; here we use _RtdApiCodeSamples_.
 
 3. Next, the program asks about the path or URL to swagger.json. Enter: https://transitdesigner.roxtec.com/api/docs/swagger.json
