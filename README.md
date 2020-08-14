@@ -118,7 +118,7 @@ To run an individual sample, navigate to its directory and run:
 
     dotnet run <Sample> [arguments...]
 
-For example, to create a transit (replace backslash with slash on a non-Windows OS):
+For example, to create a transit:
 
     cd samples
     cd transit_layouts
