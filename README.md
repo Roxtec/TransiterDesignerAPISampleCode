@@ -50,12 +50,12 @@ package called `nswag`. Note that this requires Node.js and the `npx` to be inst
 
         node -v
 
-    It should return something like:
-    ```
-     >node -v
-     v12.18.3
-    ```
-    if it cant be found head over to: https://nodejs.org/en/download/
+    It should return something like (or a newer version number):
+
+        > node -v
+        v12.18.3
+
+    If it cannot be found, head over to: https://nodejs.org/en/download/
     and download an installation.
 
 2. Install npx
