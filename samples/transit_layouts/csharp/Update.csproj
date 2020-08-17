@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="*.cs" />
+    <Compile Include="Update.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="..\..\..\Full.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="NewSample.ps1" />
+  </ItemGroup>
+
+</Project>
