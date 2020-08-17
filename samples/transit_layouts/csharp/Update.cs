@@ -17,8 +17,12 @@ public class Program
         Console.WriteLine($"Project API key: {options.ProjectApiKey}");
         Console.WriteLine($"Transit ID: {transitId}");
         
+        // Create a client and set to authenticate using the API key
         var client = Common.CreateClient(options);
 
+        // Get the transit first, so that we can compare fill rate before and after the update.
+        // Also, while the update API supports patching (sending partial data), we must send
+        // all cables rather than only new ones.
         var documentBefore = await client.GetTransitLayoutAsync(options.ProjectId, transitId);
 
         // Take existing cables, then add 4 new ones
@@ -26,7 +30,7 @@ public class Program
         var newCables = cables.Concat(GenerateAdditionalCables(cables, 4));
         
         // Build a document with transit update data.
-        // Attributes only need to contain the data to update, in this case cables.
+        // Attributes only need to contain top-level properties to update, in this case Cables.
         var createDocument = new SingleTransitLayoutCreateUpdateDocument
         {
             Data = new TransitLayoutCreateUpdateResource
