@@ -16,13 +16,15 @@ public static class Common
 {
     public const string TransitLayoutsType = "transit_layouts";
     public const string ProjectsType = "projects";
+    public const string TransitDocumentsType = "transit_documents_jobs";
 
+    public static readonly HttpClient HttpClient = new HttpClient();
+    
     public static Client CreateClient(ProjectOptions options)
     {
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.ProjectApiKey);
+        HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.ProjectApiKey);
 
-        return new Client(httpClient);
+        return new Client(HttpClient);
     }
     
     public static ProjectOptions ParseCommandLine(string[] args)
@@ -55,11 +57,7 @@ public static class Common
     {
         foreach (var arg in args)
         {
-            if (!Guid.TryParse(arg, out var transitId))
-            {
-                throw new ArgumentException($"Not a valid transit ID: {arg}");
-            }
-            yield return transitId;
+            yield return ParseTransitId(arg);
         }
     }
 
@@ -79,8 +77,28 @@ public static class Common
     {
         Console.WriteLine("Please enter a transit ID (GUID):");
         var str = Console.ReadLine();
-        return Guid.TryParse(str, out var id)
-            ? id
-            : throw new ArgumentException($"Not a valid transit ID: {str}");
+        return ParseTransitId(str);
+    }
+    
+    public static IEnumerable<Guid> AskTransitIds()
+    {
+        Console.WriteLine("Please enter one or more transit IDs (GUID), separate with commas or spaces:");
+        var str = Console.ReadLine();
+        var parts = str.Split(',', ' ');
+        var ids = ParseTransitIds(parts).ToList();
+        if (ids.Count == 0)
+        {
+            Console.WriteLine("Please specify at least one transit ID");
+            return AskTransitIds();
+        }
+
+        return ids;
+    }
+
+    private static Guid ParseTransitId(string id)
+    {
+        return Guid.TryParse(id, out var transitId)
+            ? transitId
+            : throw new ArgumentException($"Not a valid transit ID: {id}");
     }
 }

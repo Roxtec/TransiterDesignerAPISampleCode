@@ -31,7 +31,6 @@ public class Program
                 Type = Common.TransitLayoutsType,
                 Attributes = new Attributes
                 {
-                    Name = documentBefore.Data.Attributes.Name, // TODO remove
                     Cables = newCables.ToArray()
                 },
                 Relationships = new Relationships

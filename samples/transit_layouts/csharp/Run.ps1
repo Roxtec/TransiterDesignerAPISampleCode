@@ -12,4 +12,4 @@ param(
     [string[]]$transitIds
 )
 
-dotnet run -p "${name}.csproj" $projectId $projectApiKey (,$transitIds)
+dotnet run -p "${name}.csproj" $projectId $projectApiKey @transitIds
