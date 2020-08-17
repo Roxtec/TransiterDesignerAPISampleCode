@@ -26,7 +26,7 @@ $sampleFileName = "$name.cs"
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="NewSample.ps1" />
+    <None Remove="*.ps1" />
   </ItemGroup>
 
 </Project>
