@@ -18,13 +18,13 @@ public static class Common
     public const string ProjectsType = "projects";
     public const string TransitDocumentsType = "transit_documents_jobs";
 
-    public static readonly HttpClient HttpClient = new HttpClient();
-    
     public static Client CreateClient(ProjectOptions options)
     {
-        HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.ProjectApiKey);
+        var httpClient = new HttpClient();
+        
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.ProjectApiKey);
 
-        return new Client(HttpClient);
+        return new Client(httpClient);
     }
     
     public static ProjectOptions ParseCommandLine(string[] args)

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using RtdApiCodeSamples;
 
@@ -50,11 +50,7 @@ public class Program
             // Create the server job; the server responds with a job status document.
             var jobDocument = await client.CreateTransitDocumentsJobAsync(options.ProjectId, createJobDocument);
             var jobId = Guid.Parse(jobDocument.Data.Id);
-
-            // Save the download URL for later use, as the NSwag-generated DownloadTransitDocumentsAsync
-            // method isn't helpful (see https://github.com/RicoSuter/NSwag/issues/2842).
-            var downloadUrl = jobDocument.Data.Relationships.Download.Links.Related;
-
+            
             Console.WriteLine("");
             Console.WriteLine($"Documents job successfully created, got job ID {jobId}");
             
@@ -77,14 +73,14 @@ public class Program
             Console.WriteLine("Document generation complete, starting to download ...");
 
             // Download using HttpClient, see comment above about NSwag-generated DownloadTransitDocumentsAsync.
-            var response = await Common.HttpClient.GetAsync(downloadUrl);
+            var response = await client.DownloadTransitDocumentsAsync(options.ProjectId, jobId);
             
             // Extract the file name from the Content-Disposition header.
             // This is optional; the file can be saved under any name.
             var filename = GetFilenameFromResponse(response);
 
             await using var outputStream = File.OpenWrite(filename);
-            await response.Content.CopyToAsync(outputStream);
+            await response.Stream.CopyToAsync(outputStream);
 
             Console.WriteLine("");
             Console.WriteLine($"Download complete; the documents were saved in {filename}");
@@ -98,10 +94,13 @@ public class Program
         }
     }
 
-    private static string GetFilenameFromResponse(HttpResponseMessage response)
+    private static string GetFilenameFromResponse(FileResponse response)
     {
-        var contentDispositionHeader = response.Content.Headers.ContentDisposition;
-        if (contentDispositionHeader == null) return "downloaded.zip";
-        return contentDispositionHeader.FileNameStar ?? contentDispositionHeader.FileName;
+        if (response.Headers.TryGetValue("Content-Disposition", out var values))
+        {
+            var headerValue = ContentDispositionHeaderValue.Parse(values.First());
+            return headerValue.FileNameStar ?? headerValue.FileName;
+        }
+        return "downloaded";
     }
 }
