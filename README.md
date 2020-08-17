@@ -132,16 +132,22 @@ project file to facilitate this.
 
 To run an individual sample, navigate to its directory and run:
 
-    dotnet run <Sample> [arguments...]
+    dotnet run -p <Sample>.csproj [arguments...]
+
+If you use PowerShell, you can also use the supplied Run script:
+
+    .\Run.ps1 [arguments...]
 
 For example, to create a transit:
 
     cd samples
     cd transit_layouts
     cd csharp
-    dotnet run CreateTransit <project ID> <project API key>
+    dotnet run -p Create.csproj <project ID> <project API key>
 
 Replace `<project ID>` and `<project API key>` with the project ID and API key,
 respectively. 
 
-All samples require project ID and API key. The sample program will ask for a transit ID if it needs one.
+All samples require project ID and API key to be passed on the command line.
+One or more transit IDs can optionally be passed after the API key. If not,
+the sample program will ask for transit ID(s) if necessary.
