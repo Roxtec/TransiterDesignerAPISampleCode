@@ -47,37 +47,46 @@ public class Program
 
         try
         {
+            // Create the server job; the server responds with a job status document.
             var jobDocument = await client.CreateTransitDocumentsJobAsync(options.ProjectId, createJobDocument);
             var jobId = Guid.Parse(jobDocument.Data.Id);
 
-            Console.WriteLine($"Documents job successfully created, got job ID {jobId}");
+            // Save the download URL for later use, as the NSwag-generated DownloadTransitDocumentsAsync
+            // method isn't helpful (see https://github.com/RicoSuter/NSwag/issues/2842).
+            var downloadUrl = jobDocument.Data.Relationships.Download.Links.Related;
 
-            // Query job status periodically, not too often
-            bool isComplete;
-            string downloadUrl;
-            do
+            Console.WriteLine("");
+            Console.WriteLine($"Documents job successfully created, got job ID {jobId}");
+            
+            var pctComplete = jobDocument.Data.Attributes.PercentageComplete;
+            Console.WriteLine($"% complete : {pctComplete:F2}");
+
+            // Query job status periodically, but not too often
+            while (pctComplete < 100d)
             {
-                // Wait 1.5 seconds before checking status.
+                // Wait 1.5 seconds before checking status again.
                 await Task.Delay(1500);
 
                 var statusDocument = await client.GetTransitDocumentsJobAsync(options.ProjectId, jobId);
-                var pctComplete = statusDocument.Data.Attributes.PercentageComplete;
+                pctComplete = statusDocument.Data.Attributes.PercentageComplete;
 
                 Console.WriteLine($"% complete : {pctComplete:F2}");
+            }
 
-                isComplete = pctComplete >= 100d;
+            Console.WriteLine("");
+            Console.WriteLine("Document generation complete, starting to download ...");
 
-                // Save the download URL for later use, as the NSwag-generated DownloadTransitDocumentsAsync
-                // method isn't helpful (see https://github.com/RicoSuter/NSwag/issues/2842).
-                downloadUrl = statusDocument.Data.Relationships.Download.Links.Related;
-            } while (!isComplete);
-
+            // Download using HttpClient, see comment above about NSwag-generated DownloadTransitDocumentsAsync.
             var response = await Common.HttpClient.GetAsync(downloadUrl);
+            
+            // Extract the file name from the Content-Disposition header.
+            // This is optional; the file can be saved under any name.
             var filename = GetFilenameFromResponse(response);
 
             await using var outputStream = File.OpenWrite(filename);
             await response.Content.CopyToAsync(outputStream);
 
+            Console.WriteLine("");
             Console.WriteLine($"Download complete; the documents were saved in {filename}");
         }
         catch (ApiException<ErrorList> ex)

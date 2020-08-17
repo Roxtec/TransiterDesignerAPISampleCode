@@ -64,8 +64,10 @@ public class Program
         // Send the transit create request to the Transit Designer server
         var resultDocument = await client.CreateTransitLayoutAsync(options.ProjectId, createDocument, default);
 
+        Console.WriteLine("");
         Console.WriteLine($"The transit was successfully created! It has transit ID {resultDocument.Data.Id}");
 
+        Console.WriteLine("");
         Console.WriteLine("The complete server response was:");
         Console.WriteLine(JsonConvert.SerializeObject(resultDocument, Formatting.Indented));
     }

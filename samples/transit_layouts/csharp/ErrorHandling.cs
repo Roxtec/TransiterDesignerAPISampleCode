@@ -15,6 +15,9 @@ public class Program
         var client = Common.CreateClient(options);
 
         // Build a document with settings for the new transit
+        // There are 2 errors here:
+        // 1. We have a duplicate cable ID (id-a).
+        // 2. The frame part number is not valid.
         var createDocument = new SingleTransitLayoutCreateUpdateDocument
         {
             Data = new TransitLayoutCreateUpdateResource
@@ -42,8 +45,11 @@ public class Program
 
         try
         {
-            // Send the transit create request to the Transit Designer server
-            _ = await client.CreateTransitLayoutAsync(options.ProjectId, createDocument, default);
+            // Send the transit create request to the Transit Designer server.
+            // We expect it to fail.
+            var resultDocument = await client.CreateTransitLayoutAsync(options.ProjectId, createDocument, default);
+
+            Console.WriteLine($"Unexpected! The create request did not fail (resulting transit ID is {resultDocument.Data.Id}).");
         }
         catch (ApiException<ErrorList> ex)
         {

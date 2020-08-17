@@ -13,6 +13,10 @@ public class Program
             ? options.TransitIds[0]
             : Common.AskTransitId();
 
+        Console.WriteLine($"Project ID: {options.ProjectId}");
+        Console.WriteLine($"Project API key: {options.ProjectApiKey}");
+        Console.WriteLine($"Transit ID: {transitId}");
+        
         var client = Common.CreateClient(options);
 
         var documentBefore = await client.GetTransitLayoutAsync(options.ProjectId, transitId);
@@ -43,6 +47,7 @@ public class Program
         var resultDocument = await client.UpdateTransitLayoutAsync(options.ProjectId, transitId,
             createDocument);
         
+        Console.WriteLine("");
         Console.WriteLine("The transit was successfully updated!");
         Console.WriteLine($"Fill rate before : {fillRatePct(documentBefore)}");
         Console.WriteLine($"Fill rate after  : {fillRatePct(resultDocument)}");
