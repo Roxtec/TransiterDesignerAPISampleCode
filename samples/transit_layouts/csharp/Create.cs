@@ -19,10 +19,7 @@ public class Program
         Console.WriteLine($"Transit name: {transitName}");
 
         // Create a client and set to authenticate using the API key
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.ProjectApiKey);
-
-        var client = new Client(httpClient);
+        var client = Common.CreateClient(options);
 
         // Build a document with settings for the new transit
         var createDocument = new SingleTransitLayoutCreateUpdateDocument
