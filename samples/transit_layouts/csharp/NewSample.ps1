@@ -25,6 +25,10 @@ $sampleFileName = "$name.cs"
     <Compile Include="..\..\..\Full.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="NewSample.ps1" />
+  </ItemGroup>
+
 </Project>
 "@ | Out-File $projectFileName
 
