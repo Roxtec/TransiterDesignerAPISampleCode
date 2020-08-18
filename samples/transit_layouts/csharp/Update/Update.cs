@@ -58,8 +58,9 @@ public class Program
 
         static string fillRatePct(SingleTransitLayoutDocument document)
         {
-            var rate = document.Data.Attributes.PackingResult.FillRate;
-            return $"{rate:F2} %";
+            var rate = document.Data.Attributes.PackingResult.FillRate * 100;
+            var rateStr = rate.ToString("F2", CultureInfo.InvariantCulture);
+            return $"{rateStr} %";
         }
     }
 
