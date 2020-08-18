@@ -10,14 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="*.cs" />
-    <Compile Include="ErrorHandling.cs" />
-    <Compile Include="Common.cs" />
-    <Compile Include="..\..\..\Full.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="*.ps1" />
+    <Compile Include="GetDocuments.cs" />
+    <Compile Include="..\Common.cs" />
+    <Compile Include="..\..\..\..\Full.cs" />
   </ItemGroup>
 
 </Project>

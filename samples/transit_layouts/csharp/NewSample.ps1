@@ -3,6 +3,12 @@ param(
     [string]$name
 )
 
+if (Test-Path $name) {
+  throw "Sample $name already exists"
+}
+
+New-Item -Type Directory $name
+
 $projectFileName = "$name.csproj"
 $sampleFileName = "$name.cs"
 
@@ -19,18 +25,12 @@ $sampleFileName = "$name.cs"
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="*.cs" />
-    <Compile Include="$name.cs" />
-    <Compile Include="Common.cs" />
-    <Compile Include="..\..\..\Full.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="*.ps1" />
+    <Compile Include="..\Common.cs" />
+    <Compile Include="..\..\..\..\Full.cs" />
   </ItemGroup>
 
 </Project>
-"@ | Out-File $projectFileName
+"@ | Out-File $name\$projectFileName
 
 
 @"
@@ -48,4 +48,4 @@ public class Program
         var options = Common.ParseCommandLine(args);
     }
 }
-"@ | Out-File $sampleFileName
+"@ | Out-File $name\$sampleFileName

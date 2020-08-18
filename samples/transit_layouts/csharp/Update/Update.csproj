@@ -10,14 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="*.cs" />
-    <Compile Include="Update.cs" />
-    <Compile Include="Common.cs" />
-    <Compile Include="..\..\..\Full.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="*.ps1" />
+    <Compile Include="..\Common.cs" />
+    <Compile Include="..\..\..\..\Full.cs" />
   </ItemGroup>
 
 </Project>

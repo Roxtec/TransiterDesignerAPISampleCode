@@ -10,9 +10,9 @@ The repository is structured as follows:
 samples/
 \--<api name>
    \--<language>
-      |-- <sample file 1>
+      |-- <sample folder 1>
       |-- ...
-      \-- <sample file N>
+      \-- <sample folder N>
 ```
 
 Currently, there is a single API: _transit_layouts_
@@ -128,22 +128,19 @@ cannot be obtained from Transit Designer again.
 ### Running a sample
 
 The C# samples are made to be run using `dotnet run`. Each sample has its own
-project file to facilitate this.
+folder to facilitate this.
 
 To run an individual sample, navigate to its directory and run:
 
-    dotnet run -p <Sample>.csproj [arguments...]
-
-If you use PowerShell, you can also use the supplied Run script:
-
-    .\Run.ps1 [arguments...]
+    dotnet run [arguments...]
 
 For example, to create a transit:
 
     cd samples
     cd transit_layouts
     cd csharp
-    dotnet run -p Create.csproj <project ID> <project API key>
+    cd Create
+    dotnet run <project ID> <project API key>
 
 Replace `<project ID>` and `<project API key>` with the project ID and API key,
 respectively. 
