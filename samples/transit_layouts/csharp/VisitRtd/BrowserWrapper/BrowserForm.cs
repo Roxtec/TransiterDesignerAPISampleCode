@@ -60,8 +60,16 @@ namespace BrowserWrapper
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            browser.Dispose();
-            Cef.Shutdown();
+            try
+            {
+                browser.Dispose();
+                Cef.Shutdown();
+            }
+            catch
+            {
+                // Ignore error since we're about to close anyway
+            }
+
             base.OnFormClosing(e);
         }
     }
