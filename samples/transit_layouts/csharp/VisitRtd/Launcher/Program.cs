@@ -27,14 +27,14 @@ namespace Launcher
             // Create a client and set to authenticate using the API key
             var client = Common.CreateClient(options);
 
-            // Create a transit with 12 cables with diameter 33 mm.
-            // This should give 12 RM 60 modules by default (though it depends on project settings),
-            // which with a S 6x1 frame is too much.
+            // Create a transit with 6 cables with diameter 33 mm.
+            // This should give 6 RM 60 modules by default (though it depends on project settings),
+            // which with a S 6x1 frame works fine but gives no spare capacity.
             var cables = Enumerable
-                .Range(1, 12)
+                .Range(1, 6)
                 .Select(i => new Cable { Id = $"a-{i}", Diameter = 33})
                 .ToList();
-            // Build a document with settings for the new transit
+            
             var createDocument = new SingleTransitLayoutCreateUpdateDocument
             {
                 Data = new TransitLayoutCreateUpdateResource
