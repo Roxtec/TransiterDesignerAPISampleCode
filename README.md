@@ -66,10 +66,9 @@ package called `nswag`. Note that this requires Node.js and the `npx` to be inst
 
         npx nswag swagger2csclient --core 3.1
 
-3. The program first asks about namespace of the generated classes. You can choose whatever
-you like; here we use _RtdApiCodeSamples_.
+3. The program first asks about namespace of the generated classes. For the samples to work, use _RtdApiCodeSamples_.
 
-3. Next, the program asks about the path or URL to swagger.json. Enter: https://transitdesigner.roxtec.com/api/docs/swagger.json
+4. Next, the program asks about the path or URL to swagger.json. Enter: https://transitdesigner.roxtec.com/api/docs/swagger.json
 
 The program now generates a file named `Full`. This file contains C# code
 for the Swagger client.
