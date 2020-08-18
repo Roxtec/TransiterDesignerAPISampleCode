@@ -26,6 +26,9 @@ Similarly, all code samples are in C#, under the _csharp_ language folder.
 The C# code makes use of .NET Core 3.1. It can be installed
 from [here](https://dotnet.microsoft.com/download/dotnet-core/3.1).
 
+> The VisitRtd sample uses .NET Core 3.0, installable from
+  [here](https://dotnet.microsoft.com/download/dotnet-core/3.0).
+
 ### Swagger
 
 The Swagger documentation for Transit Designer can be viewed [here](https://transitdesigner.roxtec.com/api/docs).
@@ -125,6 +128,9 @@ Please copy and store the key in a safe place; once it has been generated, it
 cannot be obtained from Transit Designer again.
 
 ### Running a sample
+
+> Note that the _VisitRtd_ sample has a separate README file inside its sample folder,
+  as its build and run processes differ from the other samples.
 
 The C# samples are made to be run using `dotnet run`. Each sample has its own
 folder to facilitate this.
