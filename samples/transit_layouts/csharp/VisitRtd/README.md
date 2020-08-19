@@ -38,3 +38,5 @@ The solution has been created using Visual Studio 2019.
 
 BrowserWrapper is based on [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalExample/).
 Its license can be found in LICENSE-CefSharp.
+
+The UI can be customized by changing the file _BrowserWrapper\BrowserForm.Customize.cs_.

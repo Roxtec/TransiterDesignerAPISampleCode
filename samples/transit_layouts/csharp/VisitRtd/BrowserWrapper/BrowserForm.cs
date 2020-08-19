@@ -5,7 +5,6 @@
 using BrowserWrapper.Controls;
 using CefSharp.WinForms;
 using System;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
@@ -34,22 +33,16 @@ namespace BrowserWrapper
         {
             InitializeComponent();
 
-            Text = "Roxtec Transit Designer";
-            WindowState = FormWindowState.Maximized;
-
             browser = new ChromiumWebBrowser(applicationUrl);
             toolStripContainer.ContentPanel.Controls.Add(browser);
 
             browser.IsBrowserInitializedChanged += OnIsBrowserInitializedChanged;
 
-            // Make the exit button stand out more.
-            // The application can be exited using this button or the standard window close button. 
-            exitButton.Font = new Font(exitButton.Font.FontFamily, 14);
-            exitButton.BackColor = Color.Aqua;
-
             // Setup save completion, which allows us to call into Transit Designer to force a save
             // before exiting.
             saveCompletion = new SaveCompletion(browser);
+
+            CustomizeUI();
         }
 
         private void OnIsBrowserInitializedChanged(object sender, EventArgs e)

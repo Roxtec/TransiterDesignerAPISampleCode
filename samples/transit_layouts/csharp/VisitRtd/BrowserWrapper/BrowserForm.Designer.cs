@@ -108,7 +108,7 @@ namespace BrowserWrapper
             this.exitButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(299, 29);
-            this.exitButton.Text = "Exit and return to calling application";
+            this.exitButton.Text = "Exit";
             this.exitButton.Click += new System.EventHandler(this.ExitButtonClick);
             // 
             // BrowserForm

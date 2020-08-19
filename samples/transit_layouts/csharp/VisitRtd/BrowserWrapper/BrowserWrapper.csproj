@@ -14,6 +14,14 @@
     <PackageReference Include="CefSharp.WinForms" Version="84.3.10-pre" />
   </ItemGroup>
 
+  <!-- Make it so that BrowserForm.Customize.cs is nested below BrowserForm.cs -->
+  <ItemGroup>
+    <Compile Remove="BrowserForm.Customize.cs"/>
+    <Compile Include="BrowserForm.Customize.cs">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
   <ItemGroup>
     <!-- TODO: These updates are currently required because CefSharp.WinForms specifies
          <Private>false</Private>, which means these libraries will not be specified in
