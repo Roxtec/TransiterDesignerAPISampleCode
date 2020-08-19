@@ -1,6 +1,7 @@
 using System;
 using RtdApiCodeSamples;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
