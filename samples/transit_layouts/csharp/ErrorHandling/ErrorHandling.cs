@@ -50,6 +50,7 @@ public class Program
             var resultDocument = await client.CreateTransitLayoutAsync(options.ProjectId, createDocument, default);
 
             Console.WriteLine($"Unexpected! The create request did not fail (resulting transit ID is {resultDocument.Data.Id}).");
+            Environment.Exit(1);
         }
         catch (ApiException<ErrorList> ex)
         {

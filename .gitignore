@@ -6,3 +6,6 @@ obj/
 .idea/
 .vs/
 *.user
+*.testlog
+documents-export*
+*.bak
