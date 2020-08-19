@@ -48,10 +48,12 @@ namespace BrowserWrapper
         }
 
         // This method is called from JavaScript when the save is successful (or if it is not needed).
+        // ReSharper disable once UnusedMember.Global
         public void OnSaveSuccess(bool didSave)
             => taskCompletionSource.TrySetResult(didSave);
 
         // This method is called from JavaScript if the save fails.
+        // ReSharper disable once UnusedMember.Global
         public void OnSaveFailure(string stack)
             => taskCompletionSource.TrySetException(new Exception(stack));
     }
