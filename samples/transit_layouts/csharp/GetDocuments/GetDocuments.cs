@@ -31,11 +31,11 @@ public class Program
                     DocumentTypes = new DocumentTypes
                     {
                         BillOfMaterial = new BillOfMaterial2 {Xlsx = true},
-                        Certificate = true,
+                        Certificate = false, // only available if at least one transit has a certificate
                         Drawing = new Drawing2 {Dxf = true, Pdf = true},
                         FrameModel = new FrameModel {Revit = true, Step = true},
                         InstallationInstruction = true,
-                        // SpecificationDocument = true // not available for all project categories
+                        SpecificationDocument = false // not available for all project categories
                     }
                 },
                 Relationships = new Relationships3
