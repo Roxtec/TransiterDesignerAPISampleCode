@@ -32,4 +32,9 @@ The reason for dividing the sample into two parts is that
 BrowserWrapper is a Windows desktop application that runs without
 a console.
 
-BrowserWrapper is based on [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalExample/). Its license can be found in LICENSE-CefSharp.
+## Notes
+
+The solution has been created using Visual Studio 2019.
+
+BrowserWrapper is based on [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalExample/).
+Its license can be found in LICENSE-CefSharp.
