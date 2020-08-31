@@ -19,7 +19,7 @@ To run the sample, run:
 
 Or for the 32-bit version:
 
-    Launcher\bin\x86\Debug\netcoreapp3.0\Launcher.exe <project ID> <project API key>
+    Launcher\bin\Debug\netcoreapp3.0\Launcher.exe <project ID> <project API key>
 
 Launcher is a console application that will:
 
