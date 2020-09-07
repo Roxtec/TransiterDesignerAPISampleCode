@@ -33,6 +33,9 @@ Write-Host "Got transit ID $transitId"
 Write-Host "Running Get..."
 Exec { dotnet run -p ..\Get\Get.csproj $projectId $projectApiKey $transitId > get.testlog }
 
+Write-Host "Running List..."
+Exec { dotnet run -p ..\List\List.csproj $projectId $projectApiKey > list.testlog }
+
 Write-Host "Running Update..."
 Exec { dotnet run -p ..\Update\Update.csproj $projectId $projectApiKey $transitId > update.testlog }
 
@@ -45,8 +48,8 @@ Write-Host "Document was saved in $saveFilename"
 Write-Host "Running VisitRtd..."
 cd ..\VisitRtd
 Exec { 
-    dotnet build /p:Platform=x64 > ..\visitrtd.testlog
-    .\Launcher\bin\x64\Debug\netcoreapp3.0\Launcher.exe $projectId $projectApiKey >> ..\visitrtd.testlog
+    dotnet build /p:Platform=x64 > ..\__tests__\visitrtd.testlog
+    .\Launcher\bin\x64\Debug\netcoreapp3.1\Launcher.exe $projectId $projectApiKey >> ..\__tests__\visitrtd.testlog
 }
 cd ..\__tests__
 
